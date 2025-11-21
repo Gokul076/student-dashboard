@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* small custom theme / helpers */
+:root{
+  --brand: #6d28d9;
+  --accent: #06b6d4;
+}
+body{
+  background: #f8fafc;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  /* use smoother text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Advanced page background: layered gradients + soft animated blobs */
+body::before{
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient( circle at 10% 20%, rgba(99,102,241,0.12), transparent 12% ),
+              radial-gradient( circle at 90% 80%, rgba(236,72,153,0.10), transparent 14% ),
+              linear-gradient(180deg, rgba(247,250,255,1) 0%, rgba(248,250,252,1) 100%);
+}
+
+body::after{
+  content: '';
+  position: fixed;
+  inset: -20% -10% auto auto;
+  width: 520px;
+  height: 520px;
+  z-index: -3;
+  background: radial-gradient(circle at 30% 30%, rgba(106,90,255,0.12), transparent 30%),
+              radial-gradient(circle at 70% 70%, rgba(99,102,241,0.08), transparent 40%);
+  filter: blur(48px);
+  transform: translate3d(0,0,0) rotate(12deg);
+  opacity: .95;
+}
+
+/* small animated blob */
+.bg-blob {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: .18;
+  animation: float 8s ease-in-out infinite;
+}
+.bg-blob.blob-left{ background: linear-gradient(135deg,#6366f1,#a78bfa); left:-80px; top:120px }
+.bg-blob.blob-right{ background: linear-gradient(135deg,#ec4899,#f97316); right:-100px; bottom:60px }
+
+@keyframes float{
+  0%{ transform: translateY(0) }
+  50%{ transform: translateY(-18px) }
+  100%{ transform: translateY(0) }
+}
+
+/* small loader style used during auth check */
+.loader{
+  border-top-color: var(--brand);
+}
+
+/* card background support for dark mode */
+.dark .bg-white{ background-color: #0b1220 !important }
+.dark .text-gray-600{ color: #9aa4b2 !important }
+
+/* Fallback styles for advanced UI if Tailwind utilities aren't applied */
+.advanced-ui form {
+  max-width: 520px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(13, 20, 40, 0.12);
+  border: 1px solid rgba(255,255,255,0.5);
+}
+.advanced-ui .text-white.w-full.rounded-2xl.p-10 { /* left hero panel fallback */
+  color: #fff;
+  background: linear-gradient(135deg,#6366f1,#a78bfa,#ec4899);
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(99,102,241,0.18);
+}
+.advanced-ui input[type="email"], .advanced-ui input[type="password"], .advanced-ui input[type="text"]{
+  display:block;
+  width:100%;
+  padding: .65rem .75rem;
+  border-radius: .5rem;
+  border: 1px solid rgba(15,23,42,0.08);
+  margin-top: .4rem;
+  margin-bottom: .6rem;
+  background: rgba(255,255,255,0.9);
+}
+.advanced-ui .btn-primary{
+  display:inline-block;
+  width:100%;
+  padding:.7rem .9rem;
+  border-radius:.6rem;
+  border:0;
+  color:#fff;
+  font-weight:600;
+  background: linear-gradient(90deg,#6366f1,#ec4899);
+  box-shadow: 0 6px 18px rgba(99,102,241,0.18);
+  text-align:center;
+}
+
+.advanced-ui .btn-social{
+  display:inline-block;
+  width:100%;
+  padding:.6rem .8rem;
+  border-radius:.5rem;
+  background: linear-gradient(90deg,#6b7280,#e5e7eb);
+  color:#111827;
+  font-weight:600;
+}
+
+.advanced-ui .show-btn{
+  width: auto !important;
+  padding: .2rem .5rem !important;
+  background: transparent !important;
+  color: #374151 !important;
+  border-radius: .375rem !important;
+  z-index: 30;
+}
+
+/* make sure svg icons inside the show button don't expand */
+.advanced-ui .show-btn svg{
+  display:block;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Password field wrapper: place a small circular icon at the right edge of the input */
+.advanced-ui .password-field{ position: relative; }
+.advanced-ui .password-field .show-btn{
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffffcc;
+  border: 1px solid rgba(15,23,42,0.06);
+  box-shadow: 0 3px 8px rgba(2,6,23,0.06);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.advanced-ui .password-field .show-btn:hover{ background: #fff; }

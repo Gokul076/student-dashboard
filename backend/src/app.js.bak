@@ -24,11 +24,3 @@ app.use('/api/marks', marksRoutes);
 app.get('/', (req, res) => res.send({ ok: true, message: 'Student Performance API' }));
 
 module.exports = app;
-
-// Mount auth/me helper route
-try {
-  const authMeRouter = require('./routes/authMe');
-  app.use('/api/auth', authMeRouter);
-} catch(e) {
-  console.error('Could not mount authMe route:', e);
-}
