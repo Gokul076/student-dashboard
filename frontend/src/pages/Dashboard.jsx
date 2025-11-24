@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import Card from '../components/Card';
+import PageHeader from '../components/PageHeader';
 
 const sampleTrend = [
   { term: 'Term 1', avg: 62 },
@@ -19,19 +21,19 @@ const classComparison = [
 export default function Dashboard() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold">Overview</h1>
-          <p className="text-sm text-gray-500">Quick summary of student performance and class trends.</p>
-        </div>
-        <div className="flex gap-3">
-          <Link to="/students" className="px-4 py-2 bg-brand text-white rounded shadow">Students</Link>
-          <Link to="/classes" className="px-4 py-2 border border-gray-200 rounded">Classes</Link>
-        </div>
-      </div>
+      <PageHeader
+        title="Overview"
+        subtitle="Quick summary of student performance and class trends."
+        actions={(
+          <div className="flex gap-3">
+            <Link to="/students" className="px-4 py-2 bg-brand text-white rounded shadow">Students</Link>
+            <Link to="/classes" className="px-4 py-2 border border-gray-200 rounded">Classes</Link>
+          </div>
+        )}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="col-span-2 bg-white rounded shadow p-4">
+        <Card className="col-span-2">
           <h3 className="text-sm text-gray-600 mb-2">Average Score Trend</h3>
           <div style={{ width: '100%', height: 220 }}>
             <ResponsiveContainer>
@@ -44,9 +46,9 @@ export default function Dashboard() {
               </LineChart>
             </ResponsiveContainer>
           </div>
-        </div>
+        </Card>
 
-        <div className="bg-white rounded shadow p-4">
+        <Card>
           <h3 className="text-sm text-gray-600 mb-2">Class Comparison</h3>
           <div style={{ width: '100%', height: 220 }}>
             <ResponsiveContainer>
@@ -59,22 +61,24 @@ export default function Dashboard() {
               </BarChart>
             </ResponsiveContainer>
           </div>
-        </div>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded shadow p-4">
+        <Card>
           <h4 className="font-medium">Top Performer</h4>
           <div className="text-sm text-gray-600">Asha K. — Avg 94%</div>
-        </div>
-        <div className="bg-white rounded shadow p-4">
+        </Card>
+
+        <Card>
           <h4 className="font-medium">Most Improved</h4>
           <div className="text-sm text-gray-600">Ravi P. — +18%</div>
-        </div>
-        <div className="bg-white rounded shadow p-4">
+        </Card>
+
+        <Card>
           <h4 className="font-medium">Attention Needed</h4>
           <div className="text-sm text-gray-600">2 students below 40% in Math</div>
-        </div>
+        </Card>
       </div>
     </div>
   );

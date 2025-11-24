@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
 const { parse } = require('csv-parse');
+const mongoose = require('mongoose');
 const Student = require('../models/Student');
 const auth = require('../middleware/auth');
 
@@ -43,6 +44,14 @@ router.post('/', auth, async (req, res) => {
     // Basic validation (adjust according to your schema)
     if (!payload.name || !payload.registerNumber) {
       return res.status(400).json({ error: 'name and registerNumber are required' });
+    }
+
+    // classId is required in the Student schema; validate early and return 400 if missing/invalid
+    if (!payload.classId) {
+      return res.status(400).json({ error: 'classId is required' });
+    }
+    if (!mongoose.Types.ObjectId.isValid(payload.classId)) {
+      return res.status(400).json({ error: 'classId must be a valid id' });
     }
 
     const s = new Student(payload);

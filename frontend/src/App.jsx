@@ -5,9 +5,11 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
 import StudentsPage from './pages/StudentsPageNew';
+import CreateStudent from './pages/CreateStudent';
 import StudentProfile from './pages/StudentProfile';
 import CreateClass from './pages/CreateClass';
 import ClassesList from './pages/ClassesList';
+import ClassDetail from './pages/ClassDetail';
 import Navbar from './components/Navbar';
 
 import { verifyToken } from './api/api';
@@ -70,10 +72,12 @@ export default function App() {
 
       <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       <Route path="/students" element={<PrivateRoute><StudentsPage /></PrivateRoute>} />
+      <Route path="/students/new" element={<PrivateRoute><CreateStudent /></PrivateRoute>} />
       <Route path="/students/:id" element={<PrivateRoute><StudentProfile /></PrivateRoute>} />
 
       <Route path="/classes" element={<PrivateRoute><ClassesList /></PrivateRoute>} />
       <Route path="/classes/new" element={<PrivateRoute><CreateClass /></PrivateRoute>} />
+      <Route path="/classes/:id" element={<PrivateRoute><ClassDetail /></PrivateRoute>} />
 
       {/* fallback */}
           <Route path="*" element={<Navigate to={localStorage.getItem('token') ? '/' : '/login'} />} />

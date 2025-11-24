@@ -1,0 +1,17 @@
+{
+  "files.associations": {
+    "**/frontend/src/styles.pcss": "postcss",
+    "**/frontend/src/styles.css": "postcss",
+    "**/*.css": "postcss"
+  },
+  "tailwindCSS.includeLanguages": {
+    "postcss": "css",
+    "javascript": "javascript",
+    "javascriptreact": "html",
+    "typescriptreact": "html"
+  },
+  "css.lint.unknownAtRules": "ignore",
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false
+}
